@@ -40,3 +40,19 @@ LIMIT 50;
 * AND payment.amount > 0.99 : Filtre les micro-transactions ou anomalies de caisse en amont du calcul.
 * GROUP BY ... & HAVING SUM(...) > 100 : Isole la cible marketing recherchée en ne sélectionnant que les clients ayant généré plus de 100 $ de chiffre d'affaires cumulé sur la période.
 * ORDER BY & LIMIT 50 : Met en forme un Top 50 clair, trié alphabétiquement pour les livrables du management.
+
+4. Justification Technique Ligne par Ligne (Pour vos entretiens)
+FROM customer RIGHT JOIN payment ON ... : Résout la problématique de séparation des données en connectant l'univers financier et l'univers client via le customer_id.
+
+WHERE payment.payment_date BETWEEN ... : Restreint l'analyse à une période comptable précise (l'année 2005) pour coller à un besoin de reporting temporel standard.
+
+AND (customer.first_name NOT LIKE '%&%' OR customer.first_name NOT LIKE '%$%') : Étape cruciale de Data Cleaning (nettoyage des données). On écarte les prénoms corrompus par des caractères spéciaux (erreurs de saisie ou bugs d'import de base de données) pour ne garder que des profils clients propres.
+
+AND payment.amount > 0.99 : Filtre les micro-transactions ou anomalies de caisse en amont du calcul.
+
+GROUP BY ... & HAVING SUM(...) > 100 : Isole la cible marketing recherchée en ne sélectionnant que les clients ayant généré plus de 100 $ de chiffre d'affaires cumulé sur la période.
+
+ORDER BY & LIMIT 50 : Met en forme un Top 50 clair, trié alphabétiquement pour les livrables du management.
+
+
+
